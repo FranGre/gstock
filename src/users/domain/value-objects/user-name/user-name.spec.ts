@@ -1,3 +1,6 @@
+import { InvalidLengthUserNameException } from "../../exceptions/invalid-length-user-name-exception";
+import { UserName } from "./user-name";
+
 describe('UserName Value Object', () => {
     it('should create correctly', () => {
         const userName = new UserName('fran');
