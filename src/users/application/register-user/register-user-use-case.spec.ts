@@ -1,10 +1,25 @@
+import { UserPhoneAlreadyExistsException } from "../../domain/exceptions/user-phone-already-exists-exception";
+import { UserNameAlreadyExistsException } from "../../domain/exceptions/user-name-already-exists-exception";
+import { InMemoryUserRepository } from "../../infrastructure/persistence/in-memory-user-repository";
+import { RegisterUserCommand } from "./register-user-command";
+import { RegisterUserUseCase } from "./register-user-use-case";
+import { EnsureUserNameIsUnique } from "../../domain/services/ensure-user-name-is-unique";
+import { EnsureUserPhoneIsUnique } from "../../domain/services/ensure-user-phone-is-unique";
+
 describe('Register User Use Case', () => {
 
-    let useCase: RegisterUseCase;
+    let useCase: RegisterUserUseCase;
+    let ensureUserNameIsUnique: EnsureUserNameIsUnique;
+    let ensureUserPhoneIsUnique: EnsureUserPhoneIsUnique;
 
     beforeAll(() => {
         const repository = new InMemoryUserRepository();
-        useCase = new RegisterUserUseCase(repository);
+        ensureUserNameIsUnique = new EnsureUserNameIsUnique(repository);
+        ensureUserPhoneIsUnique = new EnsureUserPhoneIsUnique(repository);
+        useCase = new RegisterUserUseCase(
+            repository,
+            ensureUserNameIsUnique,
+            ensureUserPhoneIsUnique);
     });
 
     it('should create correctly', () => {
