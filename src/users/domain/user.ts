@@ -18,4 +18,12 @@ export class User {
         return this._phone;
     }
 
+    changeName(userName: UserName) {
+        this._name = userName;
+    }
+
+    changePhone(userPhone: UserPhone) {
+        this._phone = userPhone;
+    }
+
 }

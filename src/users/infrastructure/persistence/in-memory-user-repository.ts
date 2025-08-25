@@ -1,3 +1,4 @@
+import { UserId } from "../../domain/value-objects/user-id/user-id";
 import { User } from "../../domain/user";
 import { UserRepository } from "../../domain/user-repository";
 import { UserName } from "../../domain/value-objects/user-name/user-name";
@@ -10,6 +11,16 @@ export class InMemoryUserRepository implements UserRepository{
     create(user: User): User {
         this.users.push(user);
         return user;
+    }
+
+    findById(id: UserId): User | null {
+        for (const user of this.users) {
+            if (user.id().value() == id.value()) {
+                return user;
+            }
+        }
+
+        return null;
     }
 
     findByName(name: UserName): User | null {
@@ -30,6 +41,11 @@ export class InMemoryUserRepository implements UserRepository{
         }
 
         return null;
+    }
+
+    update(user: User): User {
+        this.users.push(user);
+        return user;
     }
     
 }

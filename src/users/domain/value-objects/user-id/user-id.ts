@@ -3,8 +3,8 @@ import { randomUUID } from "crypto";
 export class UserId {
     private readonly _id: string;
 
-    constructor() {
-        this._id = randomUUID();
+    constructor(id?: string) {
+        this._id = id ?? randomUUID();
     }
 
     value(): string {
