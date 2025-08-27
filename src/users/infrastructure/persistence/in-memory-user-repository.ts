@@ -47,5 +47,9 @@ export class InMemoryUserRepository implements UserRepository{
         this.users.push(user);
         return user;
     }
+
+    clear(): void {
+        this.users = [];
+    }
     
 }
